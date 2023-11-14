@@ -1,6 +1,6 @@
-import java.util.*;
+ import java.util.*;
 
-public class bfs {
+public class bfs1 {
     public static  class Edge{
         int src;
         int dst;
@@ -24,10 +24,10 @@ public class bfs {
         graph[3].add(new Edge(3, 1));
         graph[3].add(new Edge(3, 2));
     }
-    public static void brefs(ArrayList<Edge>graph[],int V) {
+    public static void brefs(ArrayList<Edge>graph[],int V,boolean vist[],int start) {
         Queue <Integer> q=new LinkedList<>();
-        boolean vist[]=new boolean[V];
-        q.add(0);
+        
+        q.add(start);
         while(!q.isEmpty()){
             int curr=q.remove();
             if (vist[curr]==false){
@@ -51,7 +51,13 @@ public static void main(String arg[]){
     int V=4;
     ArrayList<Edge>graph[]=new ArrayList[V];
     creategraph(graph);
-    brefs(graph, V);
+    
+     boolean vist[]=new boolean[V];
+     for (int i=0;i<V;i++){
+        if(vist[i]==false){
+            brefs(graph, V, vist, i);
+        }
+     }
     //print 2 edge
     for (int i=0;i<graph[3].size();i++){
        Edge e=graph[3].get(i);
